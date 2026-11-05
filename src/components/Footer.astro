@@ -1,0 +1,57 @@
+---
+const currentYear = new Date().getFullYear();
+---
+
+<footer class="bg-slate-950 border-t border-slate-850 text-slate-400 text-sm mt-20">
+  <div class="max-w-6xl mx-auto px-4 sm:px-6 py-12">
+    <div class="grid grid-cols-1 md:grid-cols-4 gap-8 mb-10">
+      <!-- Col 1: About -->
+      <div class="md:col-span-2">
+        <div class="flex items-center gap-2 mb-3">
+          <span class="text-base font-bold text-white">云机场 (yunjichang.vip)</span>
+          <span class="text-xs px-2 py-0.5 rounded bg-slate-800 text-teal-300 font-mono">2026 深度评测版</span>
+        </div>
+        <p class="text-xs text-slate-400 leading-relaxed max-w-md">
+          专注提供客观、严谨的机场推荐、梯子网络节点晚高峰测速、科学上网客户端使用教程及流媒体解锁实测报告。所有节点数据均来自真实带宽压测，拒绝虚假夸大宣传。
+        </p>
+        <div class="mt-4 flex items-center gap-2 text-xs text-amber-400/90 bg-amber-950/30 border border-amber-800/40 rounded-lg p-3 max-w-md">
+          <svg class="w-4 h-4 shrink-0" fill="currentColor" viewBox="0 0 20 20">
+            <path fill-rule="evenodd" d="M8.257 3.099c.765-1.36 2.722-1.36 3.486 0l5.58 9.92c.75 1.334-.213 2.98-1.742 2.98H4.42c-1.53 0-2.493-1.646-1.743-2.98l5.58-9.92zM11 13a1 1 0 11-2 0 1 1 0 012 0zm-1-8a1 1 0 00-1 1v3a1 1 0 002 0V6a1 1 0 00-1-1z" clip-rule="evenodd"/>
+          </svg>
+          <span>防骗提醒：切勿相信任何所谓“永久免费不限速”噱头，警惕跑路风险，建议月付或季付为宜。</span>
+        </div>
+      </div>
+
+      <!-- Col 2: Quick Links -->
+      <div>
+        <h4 class="text-xs font-semibold uppercase tracking-wider text-slate-200 mb-3">精选评测专栏</h4>
+        <ul class="space-y-2 text-xs">
+          <li><a href="/#ranking" class="hover:text-teal-400 transition-colors">2026 稳定机场推荐总榜</a></li>
+          <li><a href="/posts/clash-verge-tutorial/" class="hover:text-teal-400 transition-colors">Clash Verge 全平台上手教程</a></li>
+          <li><a href="/posts/vless-hysteria2-tuic-protocols/" class="hover:text-teal-400 transition-colors">Hysteria 2 vs TUIC 延迟对比</a></li>
+          <li><a href="/posts/chatgpt-netflix-unlock-airport/" class="hover:text-teal-400 transition-colors">ChatGPT / 奈飞 4K 解锁避坑</a></li>
+        </ul>
+      </div>
+
+      <!-- Col 3: Compliance & Legal -->
+      <div>
+        <h4 class="text-xs font-semibold uppercase tracking-wider text-slate-200 mb-3">声明与合规</h4>
+        <p class="text-xs text-slate-400 leading-relaxed">
+          本站仅提供网络技术科普与公开网络性能基准测试数据。请遵守当地法律法规，本站倡导合规网络学习与学术交流使用。
+        </p>
+        <p class="text-xs text-slate-400 mt-2">
+          商业推广声明：本站部分链接包含合规推广返利（已标记 nofollow/sponsored），所得收益将用于维持测速服务器与评测宽带支出。
+        </p>
+      </div>
+    </div>
+
+    <div class="pt-6 border-t border-slate-800/80 flex flex-col sm:flex-row items-center justify-between text-xs text-slate-400 gap-3">
+      <p>© {currentYear} 云机场 yunjichang.vip. All rights reserved.</p>
+      <div class="flex items-center gap-4">
+        <a href="/sitemap-index.xml" class="hover:text-teal-400 transition-colors">站点地图 (Sitemap)</a>
+        <span>•</span>
+        <a href="/robots.txt" class="hover:text-teal-400 transition-colors">Robots.txt</a>
+      </div>
+    </div>
+  </div>
+</footer>

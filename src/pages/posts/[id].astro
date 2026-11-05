@@ -1,0 +1,140 @@
+---
+import { getCollection, render } from 'astro:content';
+import Layout from '../../layouts/Layout.astro';
+
+export async function getStaticPaths() {
+  const posts = await getCollection('posts');
+  return posts.map((post) => ({
+    params: { id: post.id },
+    props: { post },
+  }));
+}
+
+const { post } = Astro.props;
+const { Content } = await render(post);
+
+const canonicalUrl = `https://yunjichang.vip/posts/${post.id}/`;
+
+// Schema.org BlogPosting
+const articleSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'BlogPosting',
+  'headline': post.data.title,
+  'description': post.data.description,
+  'datePublished': post.data.pubDate.toISOString(),
+  'dateModified': post.data.pubDate.toISOString(),
+  'mainEntityOfPage': {
+    '@type': 'WebPage',
+    '@id': canonicalUrl,
+  },
+  'author': {
+    '@type': 'Organization',
+    'name': post.data.author || '云机场评测室',
+    'url': 'https://yunjichang.vip'
+  },
+  'publisher': {
+    '@type': 'Organization',
+    'name': '云机场 (yunjichang.vip)',
+    'logo': {
+      '@type': 'ImageObject',
+      'url': 'https://yunjichang.vip/favicon.svg'
+    }
+  }
+};
+
+const breadcrumbSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'BreadcrumbList',
+  'itemListElement': [
+    {
+      '@type': 'ListItem',
+      'position': 1,
+      'name': '首页',
+      'item': 'https://yunjichang.vip/'
+    },
+    {
+      '@type': 'ListItem',
+      'position': 2,
+      'name': '评测专栏',
+      'item': 'https://yunjichang.vip/#tutorials'
+    },
+    {
+      '@type': 'ListItem',
+      'position': 3,
+      'name': post.data.title,
+      'item': canonicalUrl
+    }
+  ]
+};
+---
+
+<Layout 
+  title={`${post.data.title} - 云机场 (yunjichang.vip)`}
+  description={post.data.description}
+  keywords={`${post.data.tags.join(', ')}, 机场推荐, 梯子, 科学上网, 云机场`}
+  ogType="article"
+  publishedTime={post.data.pubDate.toISOString()}
+  canonical={canonicalUrl}
+  schema={[articleSchema, breadcrumbSchema]}
+>
+  <div class="max-w-4xl mx-auto px-4 sm:px-6 py-10">
+    <!-- Breadcrumb -->
+    <nav class="flex items-center gap-2 text-xs text-slate-400 mb-6" aria-label="Breadcrumb">
+      <a href="/" class="hover:text-teal-400 transition-colors">首页</a>
+      <span>/</span>
+      <a href="/#tutorials" class="hover:text-teal-400 transition-colors">评测与教程</a>
+      <span>/</span>
+      <span class="text-slate-300 truncate max-w-xs sm:max-w-md">{post.data.title}</span>
+    </nav>
+
+    <!-- Post Header -->
+    <header class="mb-10 pb-8 border-b border-slate-800">
+      <div class="flex items-center gap-2 mb-3">
+        {post.data.badge && (
+          <span class="px-2.5 py-0.5 rounded-full text-[11px] font-bold bg-teal-500/20 text-teal-300 border border-teal-500/30">
+            {post.data.badge}
+          </span>
+        )}
+        <time class="text-xs text-slate-400" datetime={post.data.pubDate.toISOString()}>
+          发布时间: {post.data.pubDate.toISOString().slice(0, 10)}
+        </time>
+        <span class="text-xs text-slate-400">• 作者: {post.data.author}</span>
+      </div>
+
+      <h1 class="text-2xl sm:text-4xl font-extrabold text-white tracking-tight leading-tight">
+        {post.data.title}
+      </h1>
+
+      <p class="mt-4 text-base text-slate-300 leading-relaxed bg-slate-900/60 p-4 rounded-xl border border-slate-800">
+        <strong class="text-teal-400">导读：</strong>{post.data.description}
+      </p>
+
+      <div class="flex flex-wrap gap-2 mt-4">
+        {post.data.tags.map((tag: string) => (
+          <span class="text-xs px-2.5 py-1 rounded-md bg-slate-800/80 text-slate-300 border border-slate-700/50">
+            #{tag}
+          </span>
+        ))}
+      </div>
+    </header>
+
+    <!-- Article Body -->
+    <article class="prose prose-invert prose-teal max-w-none prose-headings:font-bold prose-headings:tracking-tight prose-a:text-teal-400 prose-a:no-underline hover:prose-a:underline prose-table:border prose-table:border-slate-800 prose-th:bg-slate-900 prose-th:p-3 prose-td:p-3 prose-td:border-t prose-td:border-slate-800 text-slate-200 leading-relaxed">
+      <Content />
+    </article>
+
+    <!-- Post Bottom CTA / Share -->
+    <div class="mt-14 p-6 rounded-2xl bg-gradient-to-r from-slate-900 to-slate-850 border border-teal-500/30 flex flex-col sm:flex-row items-center justify-between gap-4">
+      <div>
+        <h4 class="text-base font-bold text-white">寻找高质量低延迟科学上网机场？</h4>
+        <p class="text-xs text-slate-400 mt-1">查看 2026 晚高峰实测排行榜，精选 IPLC 专线，支持 ChatGPT 与 Netflix 4K。</p>
+      </div>
+      <a 
+        href="/#ranking"
+        class="shrink-0 px-5 py-2.5 rounded-xl bg-teal-500 hover:bg-teal-400 text-slate-950 font-bold text-xs transition-colors shadow-lg shadow-teal-500/20"
+      >
+        查看 2026 机场推荐榜
+      </a>
+    </div>
+  </div>
+</Layout>

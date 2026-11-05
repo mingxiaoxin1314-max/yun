@@ -1,0 +1,7 @@
+User-agent: *
+Allow: /
+
+# Disallow direct outbound affiliate click logs if any
+Disallow: /go/
+
+Sitemap: https://yunjichang.vip/sitemap-index.xml

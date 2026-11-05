@@ -1,0 +1,101 @@
+---
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+
+interface Props {
+  title: string;
+  description: string;
+  keywords?: string;
+  ogType?: 'website' | 'article';
+  publishedTime?: string;
+  modifiedTime?: string;
+  schema?: Record<string, any> | Record<string, any>[];
+  canonical?: string;
+}
+
+const {
+  title,
+  description,
+  keywords = "机场推荐, 梯子, 机场测速, 2026机场, 科学上网, Clash节点, VLESS, Hysteria2, 云机场, yunjichang.vip",
+  ogType = 'website',
+  publishedTime,
+  modifiedTime,
+  schema,
+  canonical,
+} = Astro.props;
+
+const siteUrl = 'https://yunjichang.vip';
+const currentUrl = canonical || new URL(Astro.url.pathname, siteUrl).href;
+const ogImage = `${siteUrl}/favicon.svg`;
+
+const defaultWebSiteSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'WebSite',
+  'name': '云机场 (yunjichang.vip)',
+  'url': siteUrl,
+  'description': '2026专业机场推荐与梯子选购评测博客，提供真实晚高峰压测跑分与全平台客户端教程。',
+  'inLanguage': 'zh-CN',
+};
+
+const finalSchemas = schema 
+  ? (Array.isArray(schema) ? [defaultWebSiteSchema, ...schema] : [defaultWebSiteSchema, schema])
+  : [defaultWebSiteSchema];
+---
+
+<!doctype html>
+<html lang="zh-CN" class="scroll-smooth bg-slate-950 text-slate-100">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="canonical" href={currentUrl} />
+    
+    <!-- Bing & Search Engine Verification -->
+    <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1" />
+    <meta name="msvalidate.01" content="YOUR_BING_VERIFICATION_CODE_HERE" />
+    
+    <!-- Primary Meta Tags -->
+    <title>{title}</title>
+    <meta name="title" content={title} />
+    <meta name="description" content={description} />
+    <meta name="keywords" content={keywords} />
+    <meta name="author" content="云机场 (yunjichang.vip)" />
+
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content={ogType} />
+    <meta property="og:url" content={currentUrl} />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:image" content={ogImage} />
+    <meta property="og:site_name" content="云机场 yunjichang.vip" />
+    <meta property="og:locale" content="zh_CN" />
+    {publishedTime && <meta property="article:published_time" content={publishedTime} />}
+    {modifiedTime && <meta property="article:modified_time" content={modifiedTime} />}
+
+    <!-- Twitter -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:url" content={currentUrl} />
+    <meta name="twitter:title" content={title} />
+    <meta name="twitter:description" content={description} />
+    <meta name="twitter:image" content={ogImage} />
+
+    <!-- Schema.org JSON-LD (Bing Rich Snippets Support) -->
+    {finalSchemas.map((s) => (
+      <script type="application/ld+json" set:html={JSON.stringify(s)} />
+    ))}
+  </head>
+  <body class="min-h-screen flex flex-col font-sans antialiased selection:bg-teal-500 selection:text-slate-950">
+    <Header />
+    <main class="flex-grow">
+      <slot />
+    </main>
+    <Footer />
+  </body>
+</html>
+
+<style is:global>
+  ::selection {
+    background-color: #14b8a6;
+    color: #020617;
+  }
+</style>

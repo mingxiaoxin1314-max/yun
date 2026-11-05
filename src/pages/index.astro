@@ -1,0 +1,273 @@
+---
+import { getCollection } from 'astro:content';
+import Layout from '../layouts/Layout.astro';
+import AirportCard from '../components/AirportCard.astro';
+import FaqSection from '../components/FaqSection.astro';
+import { faqSchema } from '../data/faqs';
+
+const posts = await getCollection('posts');
+posts.sort((a, b) => b.data.pubDate.getTime() - a.data.pubDate.getTime());
+
+// Placeholder airport items for the framework - ready to populate with real brands
+const initialAirports = [
+  {
+    rank: 1,
+    name: "【品牌待填 A】旗舰 IPLC 专线",
+    tagline: "全专线不过公网防火墙 • 晚高峰 4K 零卡顿 • 极致稳定",
+    badge: "2026 综合评测 TOP 1",
+    speed: "920 Mbps",
+    latency: "38 ms (香港/日本)",
+    protocols: ["VLESS-Reality", "Trojan", "Shadowsocks"],
+    price: "¥18.8/月",
+    features: [
+      "自建纯内网 IPLC 专线，敏感时期稳如磐石",
+      "全节点解锁 ChatGPT-4o、Claude 3.5 与 Netflix 4K",
+      "提供 Windows / Mac / Android / iOS 一键客户端",
+      "三网运营商针对性专线优化（电信/联通/移动优化）"
+    ],
+    affUrl: "#ranking"
+  },
+  {
+    rank: 2,
+    name: "【品牌待填 B】高性价比大带宽主力站",
+    tagline: "海量落地节点 • 多入口负载均衡 • 超高流量性价比",
+    badge: "高性价比推荐",
+    speed: "680 Mbps",
+    latency: "45 ms (新加坡/台湾)",
+    protocols: ["Hysteria 2", "TUIC v5", "Trojan"],
+    price: "¥12.0/月",
+    features: [
+      "新一代 Hysteria 2 / TUIC 高吞吐低延迟协议",
+      "晚高峰大流量下载与 8K 视频播放毫无压力",
+      "原生住宅 IP 覆盖美、英、日、新等 40+ 地区",
+      "支持 5 台设备同时在线共享订阅"
+    ],
+    affUrl: "#ranking"
+  },
+  {
+    rank: 3,
+    name: "【品牌待填 C】轻量级出海与学术备用",
+    tagline: "按量付费不限时 • 纯净机房出口 • 开发者首选",
+    badge: "按量计费优选",
+    speed: "450 Mbps",
+    latency: "52 ms (美国/德国)",
+    protocols: ["Shadowsocks", "VLESS"],
+    price: "¥0.8/GB",
+    features: [
+      "流量永久不过期，适合备用与偶尔查资料人群",
+      "纯净商用出口 IP，GitHub / Docker Hub 秒级拉取",
+      "支持 Clash、Sing-box、Shadowrocket 全客户端",
+      "无任何套路合约，随充随用"
+    ],
+    affUrl: "#ranking"
+  }
+];
+
+// ItemList Schema for Bing Rich Snippets
+const itemListSchema = {
+  "@context": "https://schema.org",
+  "@type": "ItemList",
+  "name": "2026优质机场梯子测速排行榜",
+  "description": "基于晚高峰实测带宽与延迟的优质科学上网机场评测排名列表",
+  "itemListElement": initialAirports.map((airport, idx) => ({
+    "@type": "ListItem",
+    "position": idx + 1,
+    "name": airport.name,
+    "description": airport.tagline
+  }))
+};
+---
+
+<Layout
+  title="2026专业机场推荐与梯子选购指南 | 稳定专线节点测速与评测 - 云机场 (yunjichang.vip)"
+  description="云机场 (yunjichang.vip) 专注于2026最新科学上网梯子与机场推荐评测。提供真实晚高峰带宽跑分、IPLC专线延迟监控、Clash与Sing-box客户端配置教程及4K流媒体/ChatGPT解锁避坑指南。"
+  keywords="机场推荐, 梯子, 机场测速, 2026机场推荐, 科学上网, Clash节点, VLESS, Hysteria2, IPLC专线, 梯子推荐, 云机场, yunjichang.vip"
+  schema={[itemListSchema, faqSchema]}
+>
+  <!-- Hero Section -->
+  <section class="relative overflow-hidden pt-12 pb-16 border-b border-slate-900 bg-gradient-to-b from-slate-950 via-slate-900 to-slate-950">
+    <div class="absolute inset-0 bg-[radial-gradient(circle_at_50%_0%,rgba(20,184,166,0.12),transparent_60%)] pointer-events-none"></div>
+
+    <div class="max-w-5xl mx-auto px-4 sm:px-6 text-center relative z-10">
+      <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-teal-500/10 border border-teal-500/20 text-teal-300 text-xs font-semibold mb-6">
+        <span class="w-2 h-2 rounded-full bg-teal-400 animate-pulse"></span>
+        <span>2026 全网网络节点性能实测看板已更新</span>
+      </div>
+
+      <h1 class="text-3xl sm:text-5xl lg:text-6xl font-black text-white tracking-tight leading-tight">
+        2026 稳定机场推荐与 <br class="hidden sm:inline" />
+        <span class="bg-gradient-to-r from-teal-400 via-emerald-300 to-cyan-400 bg-clip-text text-transparent">
+          科学上网梯子选购
+        </span> 深度评测指南
+      </h1>
+
+      <p class="mt-6 text-base sm:text-lg text-slate-300 max-w-3xl mx-auto leading-relaxed">
+        拒绝虚假无脑软文，云机场 (<strong class="text-white font-mono font-semibold">yunjichang.vip</strong>) 依托海外高防探针集群，对主流机场进行 7×24 小时晚高峰真实带宽压测与延迟监控，为你筛选真正稳定不跑路的 IPLC 专线服务。
+      </p>
+
+      <!-- Key Metrics Strip -->
+      <div class="grid grid-cols-2 sm:grid-cols-4 gap-4 max-w-3xl mx-auto mt-10">
+        <div class="p-3.5 rounded-xl bg-slate-900/80 border border-slate-800">
+          <div class="text-2xl font-black text-teal-400 font-mono">100%</div>
+          <div class="text-[11px] text-slate-400 mt-0.5">真实晚高峰带载压测</div>
+        </div>
+        <div class="p-3.5 rounded-xl bg-slate-900/80 border border-slate-800">
+          <div class="text-2xl font-black text-emerald-400 font-mono">&lt; 40ms</div>
+          <div class="text-[11px] text-slate-400 mt-0.5">IPLC 专线优质平均延迟</div>
+        </div>
+        <div class="p-3.5 rounded-xl bg-slate-900/80 border border-slate-800">
+          <div class="text-2xl font-black text-cyan-400 font-mono">4K/8K</div>
+          <div class="text-[11px] text-slate-400 mt-0.5">流媒体原生住宅解锁率</div>
+        </div>
+        <div class="p-3.5 rounded-xl bg-slate-900/80 border border-slate-800">
+          <div class="text-2xl font-black text-amber-400 font-mono">0 元</div>
+          <div class="text-[11px] text-slate-400 mt-0.5">商业恰饭虚假排名</div>
+        </div>
+      </div>
+
+      <!-- Quick Action Buttons -->
+      <div class="mt-8 flex flex-wrap justify-center gap-4">
+        <a 
+          href="#ranking" 
+          class="px-6 py-3 rounded-xl bg-teal-500 hover:bg-teal-400 text-slate-950 font-bold text-sm transition-all shadow-lg shadow-teal-500/25 flex items-center gap-2"
+        >
+          <span>查看机场实测排行榜</span>
+          <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 14l-7 7m0 0l-7-7m7 7V3" />
+          </svg>
+        </a>
+        <a 
+          href="#tutorials" 
+          class="px-6 py-3 rounded-xl bg-slate-800 hover:bg-slate-700 text-slate-200 font-bold text-sm transition-colors border border-slate-700/80"
+        >
+          客户端新手教程
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <div class="max-w-6xl mx-auto px-4 sm:px-6 py-12">
+    <!-- Airport Ranking Section -->
+    <section id="ranking" class="my-10">
+      <div class="flex flex-col md:flex-row md:items-end justify-between mb-8 gap-4">
+        <div>
+          <div class="text-xs font-bold text-teal-400 uppercase tracking-widest mb-1">REAL-WORLD BENCHMARKS</div>
+          <h2 class="text-2xl sm:text-3xl font-extrabold text-white tracking-tight">
+            2026 稳定科学上网机场推荐榜单
+          </h2>
+          <p class="text-xs text-slate-400 mt-1">
+            测试时间段：每晚 20:30 - 22:30（全网国际出口高峰塞车期）• 数据动态更新
+          </p>
+        </div>
+        <div class="text-xs text-slate-400 bg-slate-900 px-3 py-2 rounded-lg border border-slate-800 self-start md:self-auto">
+          ⚠️ 避坑提醒：请优先按月/季度订阅，切勿一次性年付长期套餐
+        </div>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+        {initialAirports.map((airport) => (
+          <AirportCard {...airport} />
+        ))}
+      </div>
+    </section>
+
+    <!-- Essential Selection Criteria (Topic Authority for Bing) -->
+    <section class="my-16 p-8 rounded-3xl bg-slate-900/70 border border-slate-800">
+      <div class="max-w-3xl mx-auto text-center mb-10">
+        <h2 class="text-2xl font-bold text-white tracking-tight">
+          新手选购机场梯子的 <span class="text-teal-400">4 大避坑黄金法则</span>
+        </h2>
+        <p class="text-xs text-slate-400 mt-1">
+          掌握这四条核心逻辑，能帮你避开 95% 以上的劣质割韭菜跑路站。
+        </p>
+      </div>
+
+      <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
+        <div class="p-5 rounded-2xl bg-slate-950/80 border border-slate-800/80">
+          <div class="w-9 h-9 rounded-lg bg-teal-500/10 text-teal-400 flex items-center justify-center font-bold text-base mb-3 font-mono">01</div>
+          <h3 class="text-base font-bold text-white mb-1.5">线路类型优先选专线 (IPLC/IEPL)</h3>
+          <p class="text-xs text-slate-400 leading-relaxed">
+            直连线路每逢特殊时期或晚高峰极易大面积阻断。IPLC 是企业级内网专线光纤，境内到境外机房不过公网大防火墙，不惧封锁，延迟和丢包表现极其优异。
+          </p>
+        </div>
+
+        <div class="p-5 rounded-2xl bg-slate-950/80 border border-slate-800/80">
+          <div class="w-9 h-9 rounded-lg bg-emerald-500/10 text-emerald-400 flex items-center justify-center font-bold text-base mb-3 font-mono">02</div>
+          <h3 class="text-base font-bold text-white mb-1.5">坚决坚持「月付」或「季付」</h3>
+          <p class="text-xs text-slate-400 leading-relaxed">
+            不论机场吹嘘得多么天花乱坠、年付折扣多么诱人，永远不要一次性上车超长年付套餐。按月订阅即使遇到突发不可抗力也能将试错损失降到最低。
+          </p>
+        </div>
+
+        <div class="p-5 rounded-2xl bg-slate-950/80 border border-slate-800/80">
+          <div class="w-9 h-9 rounded-lg bg-cyan-500/10 text-cyan-400 flex items-center justify-center font-bold text-base mb-3 font-mono">03</div>
+          <h3 class="text-base font-bold text-white mb-1.5">检查协议多样性 (Hysteria 2 / VLESS)</h3>
+          <p class="text-xs text-slate-400 leading-relaxed">
+            优质机场必须支持新一代协议。传统 Shadowsocks 容易在恶劣公网下被精准识别降速，而 Hysteria 2、Reality 可以在恶劣弱网下依然保持高吞吐和强伪装。
+          </p>
+        </div>
+
+        <div class="p-5 rounded-2xl bg-slate-950/80 border border-slate-800/80">
+          <div class="w-9 h-9 rounded-lg bg-amber-500/10 text-amber-400 flex items-center justify-center font-bold text-base mb-3 font-mono">04</div>
+          <h3 class="text-base font-bold text-white mb-1.5">永远准备 1 个冷备用节点</h3>
+          <p class="text-xs text-slate-400 leading-relaxed">
+            鸡蛋不要放在一个篮子里。在主力高速专线机场之外，务必配置一个按量计费的轻量备用订阅，避免主力机场维护时出现彻底失联的窘境。
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Tutorials & Topic Clusters (Long Tail Anchor for Bing) -->
+    <section id="tutorials" class="my-16">
+      <div class="flex flex-col md:flex-row md:items-end justify-between mb-8 gap-4">
+        <div>
+          <div class="text-xs font-bold text-teal-400 uppercase tracking-widest mb-1">TOPIC CLUSTERS & TUTORIALS</div>
+          <h2 class="text-2xl sm:text-3xl font-extrabold text-white tracking-tight">
+            科学上网客户端与协议深度科普专栏
+          </h2>
+          <p class="text-xs text-slate-400 mt-1">
+            涵盖 Clash Verge Rev、Sing-box、协议原理、晚高峰测速分析及流媒体解锁实操。
+          </p>
+        </div>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+        {posts.map((post) => (
+          <a 
+            href={`/posts/${post.id}/`}
+            class="group p-6 rounded-2xl bg-slate-900 border border-slate-800 hover:border-teal-500/50 transition-all flex flex-col justify-between"
+          >
+            <div>
+              <div class="flex items-center gap-2 mb-3">
+                {post.data.badge && (
+                  <span class="text-[10px] font-bold px-2 py-0.5 rounded bg-teal-500/10 text-teal-300 border border-teal-500/20">
+                    {post.data.badge}
+                  </span>
+                )}
+                <span class="text-[11px] text-slate-400">
+                  {post.data.pubDate.toISOString().slice(0, 10)}
+                </span>
+              </div>
+              <h3 class="text-lg font-bold text-white group-hover:text-teal-300 transition-colors line-clamp-2 leading-snug">
+                {post.data.title}
+              </h3>
+              <p class="text-xs text-slate-400 mt-2.5 line-clamp-3 leading-relaxed">
+                {post.data.description}
+              </p>
+            </div>
+
+            <div class="mt-6 pt-4 border-t border-slate-800/80 flex items-center justify-between text-xs text-teal-400 font-semibold">
+              <span>阅读全文</span>
+              <svg class="w-4 h-4 group-hover:translate-x-1 transition-transform" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3" />
+              </svg>
+            </div>
+          </a>
+        ))}
+      </div>
+    </section>
+
+    <!-- FAQ Section -->
+    <FaqSection />
+  </div>
+</Layout>
