@@ -4,13 +4,19 @@ import Layout from '../../layouts/Layout.astro';
 
 export async function getStaticPaths() {
   const posts = await getCollection('posts');
-  return posts.map((post) => ({
+  posts.sort((a, b) => b.data.pubDate.getTime() - a.data.pubDate.getTime());
+  return posts.map((post, index) => ({
     params: { id: post.id },
-    props: { post },
+    props: { 
+      post,
+      prevPost: index < posts.length - 1 ? posts[index + 1] : null,
+      nextPost: index > 0 ? posts[index - 1] : null,
+      relatedPosts: posts.filter((p) => p.id !== post.id),
+    },
   }));
 }
 
-const { post } = Astro.props;
+const { post, prevPost, nextPost, relatedPosts } = Astro.props;
 const { Content } = await render(post);
 
 const canonicalUrl = `https://yunjichang.vip/posts/${post.id}/`;
@@ -56,7 +62,7 @@ const breadcrumbSchema = {
       '@type': 'ListItem',
       'position': 2,
       'name': '评测专栏',
-      'item': 'https://yunjichang.vip/#tutorials'
+      'item': 'https://yunjichang.vip/posts/'
     },
     {
       '@type': 'ListItem',
@@ -66,6 +72,24 @@ const breadcrumbSchema = {
     }
   ]
 };
+
+// FAQPage Schema for Bing Rich Snippets
+const faqSchema = (post.data.faqs && post.data.faqs.length > 0) ? {
+  '@context': 'https://schema.org',
+  '@type': 'FAQPage',
+  'mainEntity': post.data.faqs.map((faq) => ({
+    '@type': 'Question',
+    'name': faq.q,
+    'acceptedAnswer': {
+      '@type': 'Answer',
+      'text': faq.a,
+    },
+  })),
+} : null;
+
+const finalSchemas = faqSchema 
+  ? [articleSchema, breadcrumbSchema, faqSchema]
+  : [articleSchema, breadcrumbSchema];
 ---
 
 <Layout 
@@ -75,43 +99,43 @@ const breadcrumbSchema = {
   ogType="article"
   publishedTime={post.data.pubDate.toISOString()}
   canonical={canonicalUrl}
-  schema={[articleSchema, breadcrumbSchema]}
+  schema={finalSchemas}
 >
   <div class="max-w-4xl mx-auto px-4 sm:px-6 py-10">
     <!-- Breadcrumb -->
-    <nav class="flex items-center gap-2 text-xs text-slate-400 mb-6" aria-label="Breadcrumb">
-      <a href="/" class="hover:text-teal-400 transition-colors">首页</a>
+    <nav class="flex items-center gap-2 text-xs text-slate-500 mb-6" aria-label="Breadcrumb">
+      <a href="/" class="hover:text-teal-600 transition-colors">首页</a>
       <span>/</span>
-      <a href="/#tutorials" class="hover:text-teal-400 transition-colors">评测与教程</a>
+      <a href="/#tutorials" class="hover:text-teal-600 transition-colors">评测与教程</a>
       <span>/</span>
-      <span class="text-slate-300 truncate max-w-xs sm:max-w-md">{post.data.title}</span>
+      <span class="text-slate-800 truncate max-w-xs sm:max-w-md">{post.data.title}</span>
     </nav>
 
     <!-- Post Header -->
-    <header class="mb-10 pb-8 border-b border-slate-800">
+    <header class="mb-10 pb-8 border-b border-slate-200">
       <div class="flex items-center gap-2 mb-3">
         {post.data.badge && (
-          <span class="px-2.5 py-0.5 rounded-full text-[11px] font-bold bg-teal-500/20 text-teal-300 border border-teal-500/30">
+          <span class="px-2.5 py-0.5 rounded-full text-[11px] font-bold bg-teal-50 text-teal-700 border border-teal-200/80">
             {post.data.badge}
           </span>
         )}
-        <time class="text-xs text-slate-400" datetime={post.data.pubDate.toISOString()}>
+        <time class="text-xs text-slate-500" datetime={post.data.pubDate.toISOString()}>
           发布时间: {post.data.pubDate.toISOString().slice(0, 10)}
         </time>
-        <span class="text-xs text-slate-400">• 作者: {post.data.author}</span>
+        <span class="text-xs text-slate-500">• 作者: {post.data.author}</span>
       </div>
 
-      <h1 class="text-2xl sm:text-4xl font-extrabold text-white tracking-tight leading-tight">
+      <h1 class="text-2xl sm:text-4xl font-extrabold text-slate-900 tracking-tight leading-tight">
         {post.data.title}
       </h1>
 
-      <p class="mt-4 text-base text-slate-300 leading-relaxed bg-slate-900/60 p-4 rounded-xl border border-slate-800">
-        <strong class="text-teal-400">导读：</strong>{post.data.description}
+      <p class="mt-4 text-base text-slate-700 leading-relaxed bg-teal-50/50 p-4 rounded-xl border border-teal-200/60">
+        <strong class="text-teal-700">导读：</strong>{post.data.description}
       </p>
 
       <div class="flex flex-wrap gap-2 mt-4">
         {post.data.tags.map((tag: string) => (
-          <span class="text-xs px-2.5 py-1 rounded-md bg-slate-800/80 text-slate-300 border border-slate-700/50">
+          <span class="text-xs px-2.5 py-1 rounded-md bg-slate-100 text-slate-700 border border-slate-200/80">
             #{tag}
           </span>
         ))}
@@ -119,22 +143,170 @@ const breadcrumbSchema = {
     </header>
 
     <!-- Article Body -->
-    <article class="prose prose-invert prose-teal max-w-none prose-headings:font-bold prose-headings:tracking-tight prose-a:text-teal-400 prose-a:no-underline hover:prose-a:underline prose-table:border prose-table:border-slate-800 prose-th:bg-slate-900 prose-th:p-3 prose-td:p-3 prose-td:border-t prose-td:border-slate-800 text-slate-200 leading-relaxed">
+    <article class="prose prose-slate prose-teal max-w-none prose-headings:font-bold prose-headings:tracking-tight prose-headings:text-slate-900 prose-a:text-teal-600 prose-a:no-underline hover:prose-a:underline prose-table:border prose-table:border-slate-200 prose-th:bg-slate-100 prose-th:text-slate-800 prose-th:p-3 prose-td:p-3 prose-td:border-t prose-td:border-slate-200 text-slate-700 leading-relaxed">
       <Content />
     </article>
 
+    <!-- Post Exclusive FAQ Section (Rich Snippets & High Intent Answer Engine) -->
+    {post.data.faqs && post.data.faqs.length > 0 && (
+      <section class="mt-12 p-6 sm:p-7 rounded-2xl bg-white border border-slate-200/90 shadow-sm" aria-label="核心常见问题答疑">
+        <div class="flex items-center gap-2 mb-4 pb-3 border-b border-slate-100">
+          <span class="w-2.5 h-2.5 rounded-full bg-teal-600"></span>
+          <h3 class="text-base sm:text-lg font-bold text-slate-900 tracking-tight">
+            本文核心技术答疑与避坑自查 (FAQ)
+          </h3>
+        </div>
+        <div class="space-y-3">
+          {post.data.faqs.map((faq: { q: string; a: string }, idx: number) => (
+            <details class="group bg-slate-50 border border-slate-200/80 rounded-xl p-4 open:border-teal-500/60 open:bg-teal-50/20 transition-all">
+              <summary class="flex justify-between items-center font-bold text-slate-900 cursor-pointer list-none select-none text-xs sm:text-sm">
+                <span class="flex items-center gap-2.5">
+                  <span class="text-[10px] font-mono text-teal-700 bg-teal-100/80 px-1.5 py-0.5 rounded font-black shrink-0">Q{idx + 1}</span>
+                  <span>{faq.q}</span>
+                </span>
+                <span class="text-slate-400 group-open:rotate-180 transition-transform duration-200 shrink-0 ml-2">
+                  <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+                  </svg>
+                </span>
+              </summary>
+              <p class="mt-3 text-xs sm:text-sm text-slate-600 leading-relaxed pl-7 border-t border-slate-200/50 pt-2.5">
+                {faq.a}
+              </p>
+            </details>
+          ))}
+        </div>
+      </section>
+    )}
+
+    <!-- Prev / Next Navigation Matrix -->
+    <nav class="mt-12 pt-8 border-t border-slate-200 grid grid-cols-1 sm:grid-cols-2 gap-4" aria-label="上下篇导航">
+      {prevPost ? (
+        <a 
+          href={`/posts/${prevPost.id}/`}
+          class="group p-4 rounded-xl bg-white border border-slate-200 hover:border-teal-500/70 shadow-sm hover:shadow-md transition-all flex flex-col justify-between text-left"
+        >
+          <span class="text-[11px] font-bold text-teal-700 flex items-center gap-1.5 mb-1.5">
+            <svg class="w-3.5 h-3.5 group-hover:-translate-x-1 transition-transform" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" />
+            </svg>
+            <span>上一篇评测</span>
+          </span>
+          <span class="text-sm font-bold text-slate-800 group-hover:text-teal-600 transition-colors line-clamp-2">
+            {prevPost.data.title}
+          </span>
+        </a>
+      ) : (
+        <a 
+          href="/#ranking"
+          class="group p-4 rounded-xl bg-slate-50 border border-dashed border-slate-200 hover:border-teal-500/50 transition-all flex flex-col justify-between text-left"
+        >
+          <span class="text-[11px] font-bold text-slate-500 flex items-center gap-1.5 mb-1.5">
+            <span>🚀 榜首指南</span>
+          </span>
+          <span class="text-sm font-semibold text-slate-700 group-hover:text-teal-600 transition-colors">
+            已是首篇 • 返回 2026 机场测速总榜
+          </span>
+        </a>
+      )}
+
+      {nextPost ? (
+        <a 
+          href={`/posts/${nextPost.id}/`}
+          class="group p-4 rounded-xl bg-white border border-slate-200 hover:border-teal-500/70 shadow-sm hover:shadow-md transition-all flex flex-col justify-between text-right"
+        >
+          <span class="text-[11px] font-bold text-teal-700 flex items-center justify-end gap-1.5 mb-1.5">
+            <span>下一篇评测</span>
+            <svg class="w-3.5 h-3.5 group-hover:translate-x-1 transition-transform" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+            </svg>
+          </span>
+          <span class="text-sm font-bold text-slate-800 group-hover:text-teal-600 transition-colors line-clamp-2">
+            {nextPost.data.title}
+          </span>
+        </a>
+      ) : (
+        <a 
+          href="/#tutorials"
+          class="group p-4 rounded-xl bg-slate-50 border border-dashed border-slate-200 hover:border-teal-500/50 transition-all flex flex-col justify-between text-right"
+        >
+          <span class="text-[11px] font-bold text-slate-500 flex items-center justify-end gap-1.5 mb-1.5">
+            <span>📚 专栏归档</span>
+          </span>
+          <span class="text-sm font-semibold text-slate-700 group-hover:text-teal-600 transition-colors">
+            已是最新 • 浏览更多科普教程
+          </span>
+        </a>
+      )}
+    </nav>
+
+    <!-- Topic Cluster Internal Linking Matrix -->
+    {relatedPosts && relatedPosts.length > 0 && (
+      <section class="mt-10 p-6 sm:p-7 rounded-2xl bg-white border border-slate-200/90 shadow-sm">
+        <div class="flex items-center justify-between mb-5 pb-3 border-b border-slate-100">
+          <div>
+            <span class="text-[11px] font-mono font-bold text-teal-700 uppercase tracking-widest">TOPIC CLUSTER MATRIX</span>
+            <h3 class="text-base sm:text-lg font-bold text-slate-900 mt-0.5">
+              🔗 关联专栏矩阵与技术延伸
+            </h3>
+          </div>
+          <a href="/#tutorials" class="text-xs text-teal-600 hover:text-teal-700 font-semibold flex items-center gap-1">
+            <span>全部专栏</span>
+            <svg class="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+            </svg>
+          </a>
+        </div>
+
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+          {relatedPosts.map((related) => (
+            <a 
+              href={`/posts/${related.id}/`}
+              class="group p-4 rounded-xl bg-slate-50 hover:bg-teal-50/40 border border-slate-200/80 hover:border-teal-500/50 transition-all flex flex-col justify-between"
+            >
+              <div>
+                <div class="flex items-center gap-2 mb-2">
+                  {related.data.badge && (
+                    <span class="text-[10px] font-bold px-2 py-0.5 rounded bg-teal-100 text-teal-800">
+                      {related.data.badge}
+                    </span>
+                  )}
+                  <span class="text-[11px] text-slate-400 font-mono">
+                    {related.data.pubDate.toISOString().slice(0, 10)}
+                  </span>
+                </div>
+                <h4 class="text-sm font-bold text-slate-800 group-hover:text-teal-600 transition-colors line-clamp-2 leading-snug">
+                  {related.data.title}
+                </h4>
+                <p class="text-xs text-slate-500 mt-1.5 line-clamp-2 leading-relaxed">
+                  {related.data.description}
+                </p>
+              </div>
+              <div class="mt-4 flex items-center gap-1 text-xs font-semibold text-teal-700 group-hover:text-teal-800">
+                <span>进入专题阅读</span>
+                <svg class="w-3.5 h-3.5 group-hover:translate-x-1 transition-transform" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3" />
+                </svg>
+              </div>
+            </a>
+          ))}
+        </div>
+      </section>
+    )}
+
     <!-- Post Bottom CTA / Share -->
-    <div class="mt-14 p-6 rounded-2xl bg-gradient-to-r from-slate-900 to-slate-850 border border-teal-500/30 flex flex-col sm:flex-row items-center justify-between gap-4">
+    <div class="mt-14 p-6 rounded-2xl bg-gradient-to-r from-teal-50 to-emerald-50 border border-teal-200 flex flex-col sm:flex-row items-center justify-between gap-4 shadow-sm">
       <div>
-        <h4 class="text-base font-bold text-white">寻找高质量低延迟科学上网机场？</h4>
-        <p class="text-xs text-slate-400 mt-1">查看 2026 晚高峰实测排行榜，精选 IPLC 专线，支持 ChatGPT 与 Netflix 4K。</p>
+        <h4 class="text-base font-bold text-slate-900">寻找高质量低延迟科学上网机场？</h4>
+        <p class="text-xs text-slate-600 mt-1">查看 2026 晚高峰实测排行榜，精选 IPLC 专线，支持 ChatGPT 与 Netflix 4K。</p>
       </div>
       <a 
         href="/#ranking"
-        class="shrink-0 px-5 py-2.5 rounded-xl bg-teal-500 hover:bg-teal-400 text-slate-950 font-bold text-xs transition-colors shadow-lg shadow-teal-500/20"
+        class="shrink-0 px-5 py-2.5 rounded-xl bg-teal-600 hover:bg-teal-700 text-white font-bold text-xs transition-colors shadow-md shadow-teal-600/20"
       >
         查看 2026 机场推荐榜
       </a>
     </div>
   </div>
 </Layout>
+

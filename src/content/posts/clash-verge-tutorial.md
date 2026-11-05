@@ -1,10 +1,17 @@
 ---
 title: "2026 最新 Clash Verge Rev 客户端配置指南 | Windows/macOS 科学上网极速上手"
 description: "详细图文介绍 Clash Verge Rev 客户端下载、内核配置、机场订阅导入、Tun 模式虚拟网卡分流设置与常见 DNS 泄漏防范技巧。"
-pubDate: 2026-11-05
+pubDate: 2026-08-10
 author: "云机场技术组"
 tags: ["Clash", "客户端教程", "梯子配置", "Tun模式"]
 badge: "新手必备"
+faqs:
+  - q: "开启 Tun 虚拟网卡模式需要每次开机都以管理员权限启动吗？"
+    a: "不需要。在「设置 - 服务模式 (Service Mode)」中点击安装小图标并授权一次管理员权限后，系统会注册一个后台守护服务，后续即使普通用户开机启动也能免提权无缝开启 Tun 网卡。"
+  - q: "为什么系统代理开启后浏览器能翻墙，但 Git 命令行和 Docker 拉取依然报错超时？"
+    a: "Windows/macOS 系统代理默认只对标准 HTTP/Socks5 请求生效，命令行工具通常不走系统代理。解决办法是开启 Clash Verge 的「Tun 模式」，或者在终端中手动设置代理环境变量：export https_proxy=http://127.0.0.1:7897。"
+  - q: "拉取机场订阅一直提示 Network Error / SSL Handshake Failed 怎么排查？"
+    a: "第一步检查电脑右下角系统时间与北京时间误差是否超过 60 秒（时间偏差会导致 TLS 证书校验失效）；第二步确认订阅地址是否已被本地宽带阻断，可开启临时节点代理后再点击更新订阅。"
 ---
 
 随着 Clash for Windows (CFW) 停止维护，基于开源社区活跃迭代的 **Clash Verge Rev** 已成为 Windows 和 macOS 平台最主流、性能最强的科学上网桌面客户端。本指南带你 5 分钟完成从下载安装到订阅运行。
@@ -57,3 +64,14 @@ badge: "新手必备"
 
 - **订阅拉取失败 (Network Error)**：检查本地电脑时间是否与北京时间一致，差几秒可能导致 TLS 证书校验失败；或开启热点重试。
 - **浏览器打不开网页但 Telegram 可用**：多半是 DNS 污染或浏览器开启了自带的 DoH（Secure DNS），建议关闭浏览器的安全 DNS 或在 Clash 中启用 Fake-IP。
+
+---
+
+## 六、科学上网进阶矩阵与延伸阅读
+
+配置好客户端后，建议进一步了解协议底层原理与解锁实战，避免晚高峰卡顿与封锁：
+
+- 🚀 **挑选稳定不过墙专线**：访问 [2026 稳定机场推荐与科学上网梯子选购指南](/#ranking)，查看晚高峰带宽压测与 IPLC 延迟榜单。
+- ⚡ **新一代协议选型对比**：阅读 [2026 主流科学上网协议深度解析：VLESS-Reality、Hysteria 2 与 TUIC 性能评测](/posts/vless-hysteria2-tuic-protocols/)，掌握抗封锁与弱网提速核心机制。
+- 🎬 **原生住宅流媒体解锁**：阅读 [ChatGPT、Claude 与 Netflix 4K 原生住宅 IP 解锁避坑指南](/posts/chatgpt-netflix-unlock-airport/)，彻底告别 IP 风险拦截。
+

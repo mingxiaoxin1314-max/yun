@@ -5,3 +5,4 @@ Allow: /
 Disallow: /go/
 
 Sitemap: https://yunjichang.vip/sitemap-index.xml
+

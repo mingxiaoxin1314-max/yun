@@ -1,0 +1,162 @@
+---
+import Layout from '../layouts/Layout.astro';
+
+const canonicalUrl = 'https://yunjichang.vip/about/';
+
+const aboutSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'AboutPage',
+  'name': '关于我们与评测准则 - 云机场 (yunjichang.vip)',
+  'description': '云机场 (yunjichang.vip) 独立评测室简介、7×24小时晚高峰带宽压测方法论与商业独立性准则。',
+  'url': canonicalUrl,
+  'mainEntity': {
+    '@type': 'Organization',
+    'name': '云机场评测室',
+    'url': 'https://yunjichang.vip',
+    'logo': 'https://yunjichang.vip/favicon.svg',
+    'description': '专注于全球跨境网络专线性能监控、抗封锁协议研究与科学上网工具深度评测的独立技术组织。'
+  }
+};
+---
+
+<Layout
+  title="关于我们与评测准则 | 独立、客观、晚高峰实测 - 云机场 (yunjichang.vip)"
+  description="云机场 (yunjichang.vip) 专注于2026跨境专线网络质量评测与科学上网客户端指南。了解我们的7×24小时晚高峰压测方法论、商业透明度承诺与评测独立性准则。"
+  keywords="关于云机场, 机场评测准则, 测速方法论, 独立评测室, 商业透明度, yunjichang.vip"
+  canonical={canonicalUrl}
+  schema={aboutSchema}
+>
+  <!-- Hero Section -->
+  <section class="border-b border-slate-200 bg-gradient-to-b from-teal-50/50 via-white to-slate-50 py-12">
+    <div class="max-w-4xl mx-auto px-4 sm:px-6 text-center">
+      <!-- Breadcrumb -->
+      <nav class="flex justify-center items-center gap-2 text-xs text-slate-500 mb-6" aria-label="Breadcrumb">
+        <a href="/" class="hover:text-teal-600 transition-colors">首页</a>
+        <span>/</span>
+        <span class="text-slate-800 font-medium">关于我们与评测准则</span>
+      </nav>
+
+      <span class="inline-block px-3 py-1 rounded-full text-xs font-bold bg-teal-50 border border-teal-200/80 text-teal-800 mb-4 shadow-sm font-mono">
+        ABOUT US & EDITORIAL STANDARDS
+      </span>
+
+      <h1 class="text-3xl sm:text-4xl font-black text-slate-900 tracking-tight leading-tight">
+        拒绝虚假软文，用 <span class="bg-gradient-to-r from-teal-600 via-emerald-600 to-cyan-600 bg-clip-text text-transparent">真实数据</span> 还原网络本质
+      </h1>
+
+      <p class="mt-4 text-sm sm:text-base text-slate-600 max-w-2xl mx-auto leading-relaxed">
+        云机场 (<strong class="text-slate-800 font-mono">yunjichang.vip</strong>) 是一个专注于全球跨境网络连接质量、新一代抗封锁协议与客户端配置的独立极客评测博客。
+      </p>
+    </div>
+  </section>
+
+  <!-- Content Body -->
+  <div class="max-w-4xl mx-auto px-4 sm:px-6 py-12 space-y-12">
+    <!-- Block 1: Who We Are -->
+    <section class="p-8 rounded-2xl bg-white border border-slate-200/90 shadow-sm">
+      <div class="flex items-center gap-3 mb-4">
+        <div class="w-8 h-8 rounded-lg bg-teal-50 border border-teal-200/80 flex items-center justify-center text-teal-700 font-bold font-mono">
+          01
+        </div>
+        <h2 class="text-xl font-bold text-slate-900">我们是谁与创立初衷</h2>
+      </div>
+      <div class="space-y-3.5 text-sm text-slate-600 leading-relaxed pl-11">
+        <p>
+          在当前的中文互联网上，搜索“机场推荐”或“梯子选购”，充斥着大量粗制滥造的商业软文——要么是推荐“5元包年”的割韭菜跑路站，要么是收受商家赞助后将垃圾公网直连吹嘘成“顶级IPLC专线”。
+        </p>
+        <p>
+          我们由数位长年从事跨境网络通信架构、云计算运维以及海外数字游民工程师共同发起。我们的初衷极其纯粹：<strong>搭建一个完全基于真实晚高峰测速、拒绝商业虚假排名、提供深度技术避坑科普的独立评测阵地。</strong>
+        </p>
+      </div>
+    </section>
+
+    <!-- Block 2: Our Testing Methodology -->
+    <section class="p-8 rounded-2xl bg-white border border-slate-200/90 shadow-sm">
+      <div class="flex items-center gap-3 mb-4">
+        <div class="w-8 h-8 rounded-lg bg-emerald-50 border border-emerald-200/80 flex items-center justify-center text-emerald-700 font-bold font-mono">
+          02
+        </div>
+        <h2 class="text-xl font-bold text-slate-900">我们的评测方法论 (Methodology)</h2>
+      </div>
+      <div class="space-y-4 text-sm text-slate-600 leading-relaxed pl-11">
+        <p>所有上榜机场与技术数据，均需通过以下三重严苛测试门槛：</p>
+        <div class="grid grid-cols-1 sm:grid-cols-3 gap-4 my-2">
+          <div class="p-4 rounded-xl bg-slate-50 border border-slate-200/70">
+            <div class="font-bold text-slate-800 text-xs mb-1">⏱️ 严苛晚高峰压测</div>
+            <p class="text-xs text-slate-500 leading-relaxed">
+              测试固定在每晚 20:30 - 22:30（国际出口最拥堵期）进行多次多线程带宽压测与丢包率记录。
+            </p>
+          </div>
+          <div class="p-4 rounded-xl bg-slate-50 border border-slate-200/70">
+            <div class="font-bold text-slate-800 text-xs mb-1">🛡️ IP 欺诈分监控</div>
+            <p class="text-xs text-slate-500 leading-relaxed">
+              严格筛查落地出口 IP 是否为原生住宅 ISP，定期验证 ChatGPT-4o、Claude 3.5 与 Netflix 4K 的解锁稳定性。
+            </p>
+          </div>
+          <div class="p-4 rounded-xl bg-slate-50 border border-slate-200/70">
+            <div class="font-bold text-slate-800 text-xs mb-1">🔍 专线纯度穿透实测</div>
+            <p class="text-xs text-slate-500 leading-relaxed">
+              通过路由追踪 (Traceroute) 穿透检测，严格区分真实纯内网专线与挂羊头卖狗肉的虚假公网直连。
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Block 3: Editorial Independence & Affiliate Transparency -->
+    <section class="p-8 rounded-2xl bg-white border border-slate-200/90 shadow-sm">
+      <div class="flex items-center gap-3 mb-4">
+        <div class="w-8 h-8 rounded-lg bg-cyan-50 border border-cyan-200/80 flex items-center justify-center text-cyan-700 font-bold font-mono">
+          03
+        </div>
+        <h2 class="text-xl font-bold text-slate-900">商业透明度与编辑独立性承诺</h2>
+      </div>
+      <div class="space-y-3.5 text-sm text-slate-600 leading-relaxed pl-11">
+        <p>
+          <strong>关于推广返利（Affiliate Disclosure）：</strong>
+          为了维持 7×24 小时海外高防测速探针集群与评测宽带的高昂成本，本站部分指向机场商家的按钮包含合规的推广推荐链接。当读者通过本站链接购买服务时，我们可能会获得少许分成，但这<strong>绝不会增加您的购买成本</strong>，也<strong>绝不影响本站基于真实晚高峰测速数据的客观评测排名</strong>。所得收益将 100% 用于维持测速探针服务器租金、自费购买测试套餐及宽带支出。
+        </p>
+        <p>
+          <strong>我们的三项不可动摇铁律：</strong>
+        </p>
+        <ul class="list-disc pl-5 space-y-1.5 text-xs sm:text-sm">
+          <li><strong>绝不接受付费买榜</strong>：任何商家无法通过赞助金篡改测速数据或强占 TOP 1 排名。</li>
+          <li><strong>红牌下架机制</strong>：一旦某商家发生恶意断流、客服失联或存在跑路征兆，本站将第一时间给予红牌警示并永久剔除下架。</li>
+          <li><strong>坚决倡导月付</strong>：我们始终提醒读者坚持月付或季付，反对任何诱导一次性购买超长年付套餐的行为。</li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- Block 4: Legal & Disclaimer -->
+    <section class="p-8 rounded-2xl bg-white border border-slate-200/90 shadow-sm">
+      <div class="flex items-center gap-3 mb-4">
+        <div class="w-8 h-8 rounded-lg bg-amber-50 border border-amber-200/80 flex items-center justify-center text-amber-700 font-bold font-mono">
+          04
+        </div>
+        <h2 class="text-xl font-bold text-slate-900">法律合规边界与免责声明</h2>
+      </div>
+      <div class="space-y-3.5 text-sm text-slate-600 leading-relaxed pl-11">
+        <p>
+          本站仅提供网络通信协议科普、开源工具配置指南及公开网络基准性能测试数据。请自觉遵守所在国家和地区的法律法规，倡导用于合规外贸出海、学术科研及正规生产力交流。
+        </p>
+      </div>
+    </section>
+
+    <!-- Bottom Actions -->
+    <div class="pt-6 flex flex-wrap items-center justify-center gap-4 text-xs font-bold">
+      <a 
+        href="/#ranking" 
+        class="px-6 py-3 rounded-xl bg-slate-900 hover:bg-teal-600 text-white transition-colors shadow-sm"
+      >
+        查看 2026 机场测速总榜
+      </a>
+      <a 
+        href="/posts/" 
+        class="px-6 py-3 rounded-xl bg-white hover:bg-slate-100 text-slate-700 border border-slate-200 transition-colors shadow-sm"
+      >
+        浏览技术专栏库全部指南
+      </a>
+    </div>
+  </div>
+</Layout>
+

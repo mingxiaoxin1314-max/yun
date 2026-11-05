@@ -4,20 +4,20 @@ import { faqs } from '../data/faqs';
 
 <section id="faq" class="my-16">
   <div class="text-center max-w-2xl mx-auto mb-10">
-    <h2 class="text-2xl sm:text-3xl font-extrabold text-white tracking-tight">
-      科学上网与梯子选购 <span class="text-teal-400">避坑核心答疑</span>
+    <h2 class="text-2xl sm:text-3xl font-extrabold text-slate-900 tracking-tight">
+      科学上网与梯子选购 <span class="text-teal-700">避坑核心答疑</span>
     </h2>
-    <p class="text-sm text-slate-400 mt-2">
+    <p class="text-sm text-slate-500 mt-2">
       解答新手在机场配置、专线原理、流媒体解锁及防跑路中最常见的疑惑。
     </p>
   </div>
 
   <div class="max-w-3xl mx-auto space-y-4">
     {faqs.map((faq, index) => (
-      <details class="group bg-slate-900 border border-slate-800 rounded-2xl p-5 open:border-teal-500/40 transition-colors">
-        <summary class="flex justify-between items-center font-semibold text-slate-100 cursor-pointer list-none select-none text-base">
+      <details class="group bg-white border border-slate-200 rounded-2xl p-5 open:border-teal-500/70 shadow-sm transition-colors">
+        <summary class="flex justify-between items-center font-semibold text-slate-900 cursor-pointer list-none select-none text-base">
           <span class="flex items-center gap-3">
-            <span class="text-xs font-mono text-teal-400 bg-teal-950/60 border border-teal-800/40 px-2 py-0.5 rounded">Q{index + 1}</span>
+            <span class="text-xs font-mono text-teal-700 bg-teal-50 border border-teal-200/80 px-2 py-0.5 rounded">Q{index + 1}</span>
             <span>{faq.question}</span>
           </span>
           <span class="text-slate-400 group-open:rotate-180 transition-transform duration-200">
@@ -26,7 +26,7 @@ import { faqs } from '../data/faqs';
             </svg>
           </span>
         </summary>
-        <p class="mt-4 text-sm text-slate-300 leading-relaxed pl-9 border-t border-slate-800/60 pt-3">
+        <p class="mt-4 text-sm text-slate-600 leading-relaxed pl-9 border-t border-slate-100 pt-3">
           {faq.answer}
         </p>
       </details>

@@ -43,7 +43,7 @@ const finalSchemas = schema
 ---
 
 <!doctype html>
-<html lang="zh-CN" class="scroll-smooth bg-slate-950 text-slate-100">
+<html lang="zh-CN" class="scroll-smooth bg-slate-50 text-slate-800">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -84,7 +84,7 @@ const finalSchemas = schema
       <script type="application/ld+json" set:html={JSON.stringify(s)} />
     ))}
   </head>
-  <body class="min-h-screen flex flex-col font-sans antialiased selection:bg-teal-500 selection:text-slate-950">
+  <body class="min-h-screen flex flex-col font-sans antialiased bg-slate-50 text-slate-800 selection:bg-teal-500 selection:text-white">
     <Header />
     <main class="flex-grow">
       <slot />
@@ -95,7 +95,8 @@ const finalSchemas = schema
 
 <style is:global>
   ::selection {
-    background-color: #14b8a6;
-    color: #020617;
+    background-color: #0d9488;
+    color: #ffffff;
   }
 </style>
+

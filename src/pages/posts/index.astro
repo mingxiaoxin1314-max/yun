@@ -1,0 +1,218 @@
+---
+import { getCollection } from 'astro:content';
+import Layout from '../../layouts/Layout.astro';
+
+const allPosts = await getCollection('posts');
+allPosts.sort((a, b) => b.data.pubDate.getTime() - a.data.pubDate.getTime());
+
+const categories = [
+  { id: 'all', name: '全部专题' },
+  { id: 'client', name: '客户端教程', tag: '客户端教程' },
+  { id: 'protocol', name: '协议原理', tag: '协议解析' },
+  { id: 'unlock', name: '流媒体与AI', tag: '流媒体解锁' },
+  { id: 'router', name: '软路由与进阶', tag: '软路由' },
+];
+
+const canonicalUrl = 'https://yunjichang.vip/posts/';
+
+const collectionSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'CollectionPage',
+  'name': '云机场技术专栏与科学上网深度评测库',
+  'description': '汇集全平台科学上网客户端配置教程、IPLC专线性能压测、协议抗封锁原理及ChatGPT/流媒体解锁指南。',
+  'url': canonicalUrl,
+  'mainEntity': {
+    '@type': 'ItemList',
+    'itemListElement': allPosts.map((post, idx) => ({
+      '@type': 'ListItem',
+      'position': idx + 1,
+      'url': `https://yunjichang.vip/posts/${post.id}/`,
+      'name': post.data.title
+    }))
+  }
+};
+---
+
+<Layout
+  title="评测专栏与技术指南库 | 机场选购、协议原理与客户端教程 - 云机场 (yunjichang.vip)"
+  description="云机场技术专栏库：涵盖 Clash Verge、Sing-box、小火箭 Shadowrocket 全客户端配置教程，IPLC 与 BGP 专线晚高峰实测，以及 ChatGPT 与 Netflix 4K 原生解锁深度指南。"
+  keywords="科学上网教程, 机场评测专栏, Clash配置教程, Sing-box教程, 小火箭导入, IPLC专线原理, 梯子选购指南, 云机场"
+  canonical={canonicalUrl}
+  schema={collectionSchema}
+>
+  <!-- Hero Section -->
+  <section class="border-b border-slate-200 bg-gradient-to-b from-teal-50/50 via-white to-slate-50 py-12">
+    <div class="max-w-5xl mx-auto px-4 sm:px-6 text-center">
+      <!-- Breadcrumb -->
+      <nav class="flex justify-center items-center gap-2 text-xs text-slate-500 mb-6" aria-label="Breadcrumb">
+        <a href="/" class="hover:text-teal-600 transition-colors">首页</a>
+        <span>/</span>
+        <span class="text-slate-800 font-medium">技术评测专栏库</span>
+      </nav>
+
+      <span class="inline-block px-3 py-1 rounded-full text-xs font-bold bg-teal-50 border border-teal-200/80 text-teal-800 mb-4 shadow-sm font-mono">
+        KNOWLEDGE BASE & ARCHIVES
+      </span>
+
+      <h1 class="text-3xl sm:text-4xl lg:text-5xl font-black text-slate-900 tracking-tight leading-tight">
+        科学上网技术专栏与 <span class="bg-gradient-to-r from-teal-600 via-emerald-600 to-cyan-600 bg-clip-text text-transparent">深度评测库</span>
+      </h1>
+
+      <p class="mt-4 text-sm sm:text-base text-slate-600 max-w-2xl mx-auto leading-relaxed">
+        涵盖全平台主流客户端保姆级上手指南、跨境专线协议深度解构、晚高峰带宽压测报告与流媒体防封锁避坑指南。
+      </p>
+
+      <div class="mt-6 flex items-center justify-center gap-6 text-xs text-slate-500">
+        <div class="flex items-center gap-1.5">
+          <span class="w-2 h-2 rounded-full bg-emerald-500"></span>
+          <span>已收录 <strong>{allPosts.length}</strong> 篇深度技术指南</span>
+        </div>
+        <span>•</span>
+        <div>7×24 小时真实晚高峰验证</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Main Content & Posts Grid -->
+  <div class="max-w-6xl mx-auto px-4 sm:px-6 py-12">
+    <!-- Category Filter Tabs -->
+    <div class="flex flex-wrap items-center justify-between gap-4 mb-10 pb-6 border-b border-slate-200">
+      <div class="flex flex-wrap gap-2" id="filter-container">
+        {categories.map((cat, idx) => (
+          <button 
+            type="button"
+            class={`category-tab px-4 py-2 rounded-xl text-xs font-bold transition-all border ${idx === 0 ? 'bg-slate-900 text-white border-slate-900 shadow-sm' : 'bg-white text-slate-600 border-slate-200 hover:border-teal-500/60 hover:text-teal-700'}`}
+            data-category={cat.id}
+          >
+            {cat.name}
+          </button>
+        ))}
+      </div>
+
+      <div class="text-xs text-slate-500">
+        按发布时间倒序排列
+      </div>
+    </div>
+
+    <!-- Posts Grid -->
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6" id="posts-grid">
+      {allPosts.map((post) => (
+        <article 
+          class="post-card group bg-white border border-slate-200/90 rounded-2xl p-6 hover:border-teal-500/70 shadow-sm hover:shadow-md transition-all flex flex-col justify-between"
+          data-tags={post.data.tags.join(',')}
+        >
+          <div>
+            <!-- Header Meta -->
+            <div class="flex items-center justify-between gap-2 mb-3">
+              {post.data.badge ? (
+                <span class="text-[10px] font-bold px-2 py-0.5 rounded bg-teal-50 text-teal-700 border border-teal-200/80">
+                  {post.data.badge}
+                </span>
+              ) : (
+                <span class="text-[10px] font-bold px-2 py-0.5 rounded bg-slate-100 text-slate-600 border border-slate-200">
+                  深度实测
+                </span>
+              )}
+              <time class="text-[11px] text-slate-400 font-mono" datetime={post.data.pubDate.toISOString()}>
+                {post.data.pubDate.toISOString().slice(0, 10)}
+              </time>
+            </div>
+
+            <!-- Title -->
+            <h2 class="text-lg font-bold text-slate-900 group-hover:text-teal-600 transition-colors line-clamp-2 leading-snug">
+              <a href={`/posts/${post.id}/`}>
+                {post.data.title}
+              </a>
+            </h2>
+
+            <!-- Excerpt -->
+            <p class="text-xs text-slate-600 mt-2.5 line-clamp-3 leading-relaxed">
+              {post.data.description}
+            </p>
+
+            <!-- Tags list -->
+            <div class="flex flex-wrap gap-1.5 mt-4">
+              {post.data.tags.slice(0, 3).map((tag: string) => (
+                <span class="text-[10px] font-mono px-2 py-0.5 rounded bg-slate-50 text-slate-600 border border-slate-200/60">
+                  #{tag}
+                </span>
+              ))}
+            </div>
+          </div>
+
+          <!-- Bottom Read Action -->
+          <div class="mt-6 pt-4 border-t border-slate-100 flex items-center justify-between text-xs">
+            <span class="text-slate-400 text-[11px]">作者: {post.data.author}</span>
+            <a 
+              href={`/posts/${post.id}/`} 
+              class="text-teal-600 font-bold group-hover:text-teal-700 flex items-center gap-1"
+            >
+              <span>阅读全文</span>
+              <svg class="w-3.5 h-3.5 group-hover:translate-x-1 transition-transform" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3" />
+              </svg>
+            </a>
+          </div>
+        </article>
+      ))}
+    </div>
+
+    <!-- Bottom Ranking CTA Banner -->
+    <div class="mt-16 p-8 rounded-3xl bg-gradient-to-r from-teal-50 via-slate-50 to-emerald-50 border border-teal-200/90 flex flex-col md:flex-row items-center justify-between gap-6 shadow-sm">
+      <div class="max-w-2xl">
+        <span class="text-xs font-bold text-teal-800 uppercase tracking-widest font-mono">2026 LIVE BENCHMARKS</span>
+        <h3 class="text-xl sm:text-2xl font-black text-slate-900 mt-1">
+          需要一条真正稳定不堵车的 IPLC 专线？
+        </h3>
+        <p class="text-xs sm:text-sm text-slate-600 mt-2 leading-relaxed">
+          依托海外高防探针集群，对主流机场进行 7×24 小时晚高峰真实带宽压测与延迟监控，零商业恰饭虚假排名。
+        </p>
+      </div>
+      <a 
+        href="/#ranking"
+        class="shrink-0 px-6 py-3.5 rounded-xl bg-teal-600 hover:bg-teal-700 text-white font-bold text-xs sm:text-sm transition-all shadow-md shadow-teal-600/20 flex items-center gap-2"
+      >
+        <span>查看 2026 机场测速总榜</span>
+        <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3" />
+        </svg>
+      </a>
+    </div>
+  </div>
+</Layout>
+
+<script>
+  // Simple client-side category filtering
+  const tabs = document.querySelectorAll('.category-tab');
+  const cards = document.querySelectorAll('.post-card');
+
+  tabs.forEach((tab) => {
+    tab.addEventListener('click', () => {
+      tabs.forEach((t) => {
+        t.classList.remove('bg-slate-900', 'text-white', 'border-slate-900', 'shadow-sm');
+        t.classList.add('bg-white', 'text-slate-600', 'border-slate-200');
+      });
+      tab.classList.add('bg-slate-900', 'text-white', 'border-slate-900', 'shadow-sm');
+      tab.classList.remove('bg-white', 'text-slate-600', 'border-slate-200');
+
+      const cat = tab.getAttribute('data-category');
+      cards.forEach((card) => {
+        const tags = (card.getAttribute('data-tags') || '').toLowerCase();
+        if (cat === 'all') {
+          (card as HTMLElement).style.display = 'flex';
+        } else if (cat === 'client' && (tags.includes('clash') || tags.includes('客户端') || tags.includes('shadowrocket') || tags.includes('sing-box'))) {
+          (card as HTMLElement).style.display = 'flex';
+        } else if (cat === 'protocol' && (tags.includes('协议') || tags.includes('iplc') || tags.includes('vless') || tags.includes('hysteria'))) {
+          (card as HTMLElement).style.display = 'flex';
+        } else if (cat === 'unlock' && (tags.includes('解锁') || tags.includes('chatgpt') || tags.includes('流媒体'))) {
+          (card as HTMLElement).style.display = 'flex';
+        } else if (cat === 'router' && (tags.includes('软路由') || tags.includes('openwrt') || tags.includes('旁路由'))) {
+          (card as HTMLElement).style.display = 'flex';
+        } else {
+          (card as HTMLElement).style.display = 'none';
+        }
+      });
+    });
+  });
+</script>
+
