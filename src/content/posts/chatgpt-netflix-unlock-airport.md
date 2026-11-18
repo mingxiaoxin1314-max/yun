@@ -59,6 +59,7 @@ faqs:
 
 ## 五、科学上网进阶矩阵与延伸阅读
 
+- 💼 **跨境电商与出海防封**：参考 [TikTok 运营与外贸跨境防封指南：原生住宅静态 IP 与企业专线选购实战](/posts/tiktok-ecommerce-residential-ip-guide/)，掌握独享静态 ISP 与防关联搭建。
 - 🛠️ **新手客户端配置上手**：参考 [2026 最新 Clash Verge Rev 客户端配置指南](/posts/clash-verge-tutorial/)，掌握分流规则配置与 Tun 模式。
 - ⚡ **协议吞吐与防封原理**：参考 [2026 主流科学上网协议深度解析：VLESS-Reality、Hysteria 2 与 TUIC 性能评测](/posts/vless-hysteria2-tuic-protocols/)，挑选合适的分流协议。
 - 📊 **晚高峰性能排行榜**：查看 [2026 稳定机场推荐总榜 (IPLC 专线)](/#ranking)，实时查看各节点晚高峰测速与解锁状态。

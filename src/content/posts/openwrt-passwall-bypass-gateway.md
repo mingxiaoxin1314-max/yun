@@ -70,12 +70,13 @@ faqs:
 2. IP 地址：保持不变（如 `192.168.1.50`）。
 3. **路由器（网关）**：修改为旁路由 IP（**`192.168.1.2`**）。
 4. **DNS**：修改为旁路由 IP（**`192.168.1.2`**）。
-5. 保存后，Apple TV 即可秒开 4K Netflix、YouTube 与 Disney+，彻底免去安装任何客户端的繁琐步骤。
+5. 保存后，Apple TV 即可秒开 4K Netflix、YouTube 与 Disney+，彻底免去安装任何客户端的繁琐步骤。如果您觉得购买工控机成本过高，亦可参考 [Apple TV (tvOS) 科学上网配置全攻略](/posts/apple-tv-tvos-proxy-setup-guide/) 直接在电视端安装独立客户端。
 
 ---
 
 ## 五、科学上网进阶矩阵与延伸阅读
 
+- 📺 **免软路由电视端方案**：参考 [Apple TV (tvOS) 科学上网配置全攻略](/posts/apple-tv-tvos-proxy-setup-guide/)，零额外硬件投资实现客厅 4K HDR 极速播放。
 - 🍏 **移动端专属教程**：阅读 [2026 小火箭 (Shadowrocket) iOS 节点导入与规则分流新手实操指南](/posts/shadowrocket-ios-tutorial/)。
 - ⚡ **底层线路机制**：阅读 [IPLC 专线 vs BGP 隧道中转：为什么晚高峰专线不卡顿、敏感时期零封锁？](/posts/iplc-vs-bgp-transit-differences/)。
 - 🎬 **原生流媒体解锁技巧**：阅读 [ChatGPT、Claude 与 Netflix 4K 原生住宅 IP 解锁避坑指南](/posts/chatgpt-netflix-unlock-airport/)。

@@ -63,7 +63,7 @@ faqs:
 ## 五、常见报错与排错自查
 
 - **订阅拉取失败 (Network Error)**：检查本地电脑时间是否与北京时间一致，差几秒可能导致 TLS 证书校验失败；或开启热点重试。
-- **浏览器打不开网页但 Telegram 可用**：多半是 DNS 污染或浏览器开启了自带的 DoH（Secure DNS），建议关闭浏览器的安全 DNS 或在 Clash 中启用 Fake-IP。
+- **节点延时正常但打不开网页（10054 / Connection Reset）**：多半是系统代理未正确接管、DNS 污染或浏览器自带 DoH 干扰，详细分步排查方案请参考 [节点测速正常但打不开网页？10054 报错与 DNS 污染治理深度排查指南](/posts/proxy-connection-reset-dns-troubleshooting/)。
 
 ---
 
@@ -71,6 +71,7 @@ faqs:
 
 配置好客户端后，建议进一步了解协议底层原理与解锁实战，避免晚高峰卡顿与封锁：
 
+- 🛠️ **深度网络排障指南**：参考 [节点测速正常但打不开网页？10054 报错与 DNS 污染治理深度排查指南](/posts/proxy-connection-reset-dns-troubleshooting/)，彻底解决虚拟网卡与系统代理冲突。
 - 🚀 **挑选稳定不过墙专线**：访问 [2026 稳定机场推荐与科学上网梯子选购指南](/#ranking)，查看晚高峰带宽压测与 IPLC 延迟榜单。
 - ⚡ **新一代协议选型对比**：阅读 [2026 主流科学上网协议深度解析：VLESS-Reality、Hysteria 2 与 TUIC 性能评测](/posts/vless-hysteria2-tuic-protocols/)，掌握抗封锁与弱网提速核心机制。
 - 🎬 **原生住宅流媒体解锁**：阅读 [ChatGPT、Claude 与 Netflix 4K 原生住宅 IP 解锁避坑指南](/posts/chatgpt-netflix-unlock-airport/)，彻底告别 IP 风险拦截。

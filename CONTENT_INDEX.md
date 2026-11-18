@@ -1,10 +1,13 @@
 # CONTENT_INDEX.md - 云机场 (yunjichang.vip) 全站文章索引
 
 > 本文件由脚本 `scripts/gen-index.js` 自动维护。每次新增、更新文章后必须重新执行该脚本更新索引。
-> 统计：当前收录文章共 **7** 篇 | 最后索引时间：2026-11-18
+> 统计：当前收录文章共 **10** 篇 | 最后索引时间：2026-11-18
 
 ## 📚 全站文章索引清单（按发布日期倒序）
 
+- [2026-11-15] [TikTok 运营与外贸跨境防封指南：原生住宅静态 IP 与企业专线选购实战](/posts/tiktok-ecommerce-residential-ip-guide/) | 关键词: TikTok运营, 外贸跨境, 防关联, 原生住宅IP, 静态ISP, 出海专线
+- [2026-11-10] [Apple TV (tvOS) 科学上网配置全攻略：免软路由实现电视端 YouTube/Netflix 4K HDR 极速播放](/posts/apple-tv-tvos-proxy-setup-guide/) | 关键词: AppleTV, tvOS, 电视端科学上网, Shadowrocket, Netflix4K, 家庭影院
+- [2026-11-06] [节点测速正常但打不开网页？10054 报错与 DNS 污染治理深度排查指南](/posts/proxy-connection-reset-dns-troubleshooting/) | 关键词: 故障排查, 10054报错, DNS污染, Fake-IP, Tun模式, Clash报错
 - [2026-11-02] [ChatGPT 与 Netflix 4K 流媒体解锁专线机场选购避坑指南 (2026实测)](/posts/chatgpt-netflix-unlock-airport/) | 关键词: 流媒体解锁, ChatGPT专线, 机场推荐, IPLC专线
 - [2026-10-20] [2026主流梯子协议深度解析：VLESS-Reality vs Hysteria 2 vs TUIC 延迟与晚高峰对比](/posts/vless-hysteria2-tuic-protocols/) | 关键词: 协议科普, Hysteria2, VLESS, 晚高峰测速
 - [2026-09-15] [Sing-box 全平台通用配置指南与订阅转换实战 (iOS/Android/Windows/macOS)](/posts/sing-box-full-guide/) | 关键词: Sing-box, 跨平台, 客户端教程, 通用核心, Hysteria2
