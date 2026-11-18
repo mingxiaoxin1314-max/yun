@@ -8,6 +8,7 @@
     "start": "astro dev",
     "build": "astro build",
     "preview": "astro preview",
+    "gen:index": "node scripts/gen-index.js",
     "push:indexnow": "node scripts/push-indexnow.cjs"
   },
   "devDependencies": {
