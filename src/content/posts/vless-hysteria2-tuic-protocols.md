@@ -5,6 +5,7 @@ pubDate: 2026-10-20
 author: "云机场技术组"
 tags: ["协议科普", "Hysteria2", "VLESS", "晚高峰测速"]
 badge: "硬核深度"
+category: "protocol"
 faqs:
   - q: "Hysteria 2 基于 UDP 传输，会被部分地区运营商进行 UDP QoS 限速吗？"
     a: "存在这种可能。部分省份的二级宽带或长城宽带会对国际出口 UDP 流量进行较为严格的限速。如果发现 Hysteria 2 节点速度反常偏低，建议无缝切换为走 TCP 443 伪装的标准 VLESS-Reality 或企业级 IPLC 内网专线。"

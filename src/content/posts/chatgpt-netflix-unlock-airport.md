@@ -5,6 +5,7 @@ pubDate: 2026-11-02
 author: "云机场技术组"
 tags: ["流媒体解锁", "ChatGPT专线", "机场推荐", "IPLC专线"]
 badge: "选购指南"
+category: "unlock"
 faqs:
   - q: "为什么节点标注了支持解锁，但打开 ChatGPT 依然提示 Access Denied？"
     a: "多半由两点导致：1. 浏览器保留了之前被拉黑 IP 的 Cookie 缓存，建议使用无痕模式（Incognito）或清除 OpenAI 站点的全部 LocalStorage 缓存；2. 客户端分流规则未生效，导致 OpenAI 的 WebSocket 流量回落到了未解锁的默认直连节点上，请确保客户端规则模式中 OpenAI 走专属解锁节点。"

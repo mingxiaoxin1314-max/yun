@@ -99,6 +99,7 @@ const collectionSchema = {
       {allPosts.map((post) => (
         <article 
           class="post-card group bg-white border border-slate-200/90 rounded-2xl p-6 hover:border-teal-500/70 shadow-sm hover:shadow-md transition-all flex flex-col justify-between"
+          data-category={post.data.category || 'client'}
           data-tags={post.data.tags.join(',')}
         >
           <div>
@@ -197,16 +198,9 @@ const collectionSchema = {
 
       const cat = tab.getAttribute('data-category');
       cards.forEach((card) => {
+        const cardCat = card.getAttribute('data-category') || '';
         const tags = (card.getAttribute('data-tags') || '').toLowerCase();
-        if (cat === 'all') {
-          (card as HTMLElement).style.display = 'flex';
-        } else if (cat === 'client' && (tags.includes('clash') || tags.includes('客户端') || tags.includes('shadowrocket') || tags.includes('sing-box'))) {
-          (card as HTMLElement).style.display = 'flex';
-        } else if (cat === 'protocol' && (tags.includes('协议') || tags.includes('iplc') || tags.includes('vless') || tags.includes('hysteria'))) {
-          (card as HTMLElement).style.display = 'flex';
-        } else if (cat === 'unlock' && (tags.includes('解锁') || tags.includes('chatgpt') || tags.includes('流媒体'))) {
-          (card as HTMLElement).style.display = 'flex';
-        } else if (cat === 'router' && (tags.includes('软路由') || tags.includes('openwrt') || tags.includes('旁路由'))) {
+        if (cat === 'all' || cardCat === cat) {
           (card as HTMLElement).style.display = 'flex';
         } else {
           (card as HTMLElement).style.display = 'none';

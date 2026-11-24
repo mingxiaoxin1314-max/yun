@@ -86,3 +86,4 @@ faqs:
 - 🌐 **家庭全屋免客户端方案**：参考 [软路由 OpenWrt 旁路由透明代理实战配置](/posts/openwrt-passwall-bypass-gateway/)，为局域网所有智能家居、游戏主机与电视盒子统一部署透明代理。
 - 🎬 **流媒体解锁专线深度科普**：查阅 [ChatGPT 与 Netflix 4K 流媒体解锁专线选购避坑指南](/posts/chatgpt-netflix-unlock-airport/)，了解住宅原生 IP 与机房广播 IP 的底层风控区别。
 - 🚀 **客厅 4K 极速大带宽专线排行榜**：前往 [首页 2026 稳定机场推荐总榜 (IPLC 专线)](/#ranking)，获取通过晚高峰 4K 压测的高分专线服务。
+
