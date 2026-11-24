@@ -68,6 +68,7 @@ Sing-box 采用模块化的 JSON 结构，主要包含三大板块：
 
 ## 五、科学上网进阶矩阵与延伸阅读
 
+- 🍎 **Mac 平台深度选型指南**：参考 [Mac 平台科学上网终极选型：Surge 5 vs Clash Verge Rev vs Sing-box 深度对比](/posts/mac-surge-clash-singbox-comparison/)，深入了解 Sing-box 在 macOS 下的高并发与低内存开销表现。
 - 🍏 **iOS 专属轻量首选**：阅读 [2026 小火箭 (Shadowrocket) iOS 节点导入与规则分流新手实操指南](/posts/shadowrocket-ios-tutorial/)。
 - 🖥️ **Windows/macOS 图形主力**：阅读 [2026 最新 Clash Verge Rev 客户端配置指南](/posts/clash-verge-tutorial/)。
 - ⚡ **协议底层机制剖析**：阅读 [2026 主流科学上网协议深度解析：VLESS-Reality、Hysteria 2 与 TUIC 性能评测](/posts/vless-hysteria2-tuic-protocols/)。

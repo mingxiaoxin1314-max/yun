@@ -1,10 +1,11 @@
 # CONTENT_INDEX.md - 云机场 (yunjichang.vip) 全站文章索引
 
 > 本文件由脚本 `scripts/gen-index.js` 自动维护。每次新增、更新文章后必须重新执行该脚本更新索引。
-> 统计：当前收录文章共 **10** 篇 | 最后索引时间：2026-11-24
+> 统计：当前收录文章共 **11** 篇 | 最后索引时间：2026-11-24
 
 ## 📚 全站文章索引清单（按发布日期倒序）
 
+- [2026-11-20] [Mac 平台科学上网终极选型：Surge 5 vs Clash Verge Rev vs Sing-box 深度对比与配置指南](/posts/mac-surge-clash-singbox-comparison/) | 关键词: Mac科学上网, Surge5, ClashVerge, Sing-box, 客户端选型, macOS代理
 - [2026-11-15] [TikTok 运营与外贸跨境防封指南：原生住宅静态 IP 与企业专线选购实战](/posts/tiktok-ecommerce-residential-ip-guide/) | 关键词: TikTok运营, 外贸跨境, 防关联, 原生住宅IP, 静态ISP, 出海专线
 - [2026-11-10] [Apple TV (tvOS) 科学上网配置全攻略：免软路由实现电视端 YouTube/Netflix 4K HDR 极速播放](/posts/apple-tv-tvos-proxy-setup-guide/) | 关键词: AppleTV, tvOS, 电视端科学上网, Shadowrocket, Netflix4K, 家庭影院
 - [2026-11-06] [节点测速正常但打不开网页？10054 报错与 DNS 污染治理深度排查指南](/posts/proxy-connection-reset-dns-troubleshooting/) | 关键词: 故障排查, 10054报错, DNS污染, Fake-IP, Tun模式, Clash报错

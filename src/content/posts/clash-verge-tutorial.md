@@ -72,6 +72,7 @@ faqs:
 
 配置好客户端后，建议进一步了解协议底层原理与解锁实战，避免晚高峰卡顿与封锁：
 
+- 🍎 **Mac 平台深度选型指南**：参考 [Mac 平台科学上网终极选型：Surge 5 vs Clash Verge Rev vs Sing-box 深度对比](/posts/mac-surge-clash-singbox-comparison/)，获取 MacBook 耗电续航调优与增强模式技巧。
 - 🛠️ **深度网络排障指南**：参考 [节点测速正常但打不开网页？10054 报错与 DNS 污染治理深度排查指南](/posts/proxy-connection-reset-dns-troubleshooting/)，彻底解决虚拟网卡与系统代理冲突。
 - 🚀 **挑选稳定不过墙专线**：访问 [2026 稳定机场推荐与科学上网梯子选购指南](/#ranking)，查看晚高峰带宽压测与 IPLC 延迟榜单。
 - ⚡ **新一代协议选型对比**：阅读 [2026 主流科学上网协议深度解析：VLESS-Reality、Hysteria 2 与 TUIC 性能评测](/posts/vless-hysteria2-tuic-protocols/)，掌握抗封锁与弱网提速核心机制。
